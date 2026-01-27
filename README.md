@@ -13,8 +13,8 @@ According to the assignment requirements, the folder hierarchy is as follows:
     * `variables.py`: Variable declaration and assignment.
    
 
- How to Save Changes to GitHub
-To sync this project with GitHub account, I used the following commands in your terminal:
+ How to Save Changes to GitHub:
+To sync this project with GitHub account, I used the following commands in my terminal:
 
 1. **Stage all changes:**
    `git add .`
@@ -25,4 +25,4 @@ To sync this project with GitHub account, I used the following commands in your 
 3. **Push to the remote repository:**
    `git push origin main`
 
-* **Source:** W3Schools Python Tutorial
+* **Source:** W3Schools Python Tutorial. 
