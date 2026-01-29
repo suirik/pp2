@@ -25,4 +25,4 @@ To sync this project with GitHub account, I used the following commands in my te
 3. **Push to the remote repository:**
    `git push origin main`
 
-* **Source:** W3Schools Python Tutorial. 
+* **Source:** W3Schools Python Tutorial.  
