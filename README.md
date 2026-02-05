@@ -23,7 +23,7 @@ The folder hierarchy is organized as follows:
 ### **Practice 2: Control Flow**
 * **boolean/** — Evaluation of expressions (True/False).
 * **if_else/** — Conditional branching logic.
-* **loops/** — Iteration using `for` and `while` loops.
+* **loops/** — Iteration using `for` and `while` loops. 
 
 ---
 
