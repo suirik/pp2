@@ -1,64 +1,39 @@
-PP2: Python Programming Coursework
-This repository contains the laboratory works and practice assignments for the Python Programming 2 course. The project is organized into modular directories based on the curriculum progression.
+# PP2 PROJECT
 
-📂 Project Structure
-Practice 1: Python Fundamentals
+**Student:** suiriksamatkyzy  
+**Source:** W3Schools Python Tutorial  
 
-Concepts: Basic syntax, data types, and variable manipulation.
+---
 
-Key Files:
+##  Project Overview
+* This repository is created to practice **basic Python syntax** and **Git workflow**.
+* It follows the structure required for the **W3Schools "Topics to Cover"** assignment.
 
-hello_world.py: Basic output operations.
+---
 
-variables.py: Variable declaration and assignment.
+##  Project Structure
+The folder hierarchy is organized as follows:
 
-data_types.py: Working with integers, strings, and floats.
+### **Practice 1: Python Basics**
+* `hello_world.py` — Basic output examples.
+* `variables.py` — Variable declaration and assignment.
+* `data_types.py` — Demonstration of different Python data types.
+* `strings.py` — String manipulation and methods.
+* `numbers.py` — Working with integers and floats.
 
-strings.py: String formatting and concatenation.
+### **Practice 2: Control Flow**
+* **boolean/** — Evaluation of expressions (True/False).
+* **if_else/** — Conditional branching logic.
+* **loops/** — Iteration using `for` and `while` loops.
 
-Practice 2: Control Flow and Logic
+---
 
-Concepts: Decision making, logical comparisons, and iterative processes.
+##  How to Save Changes to GitHub
+To sync this project with your GitHub account, use these commands in your terminal:
 
-Directories:
-
-boolean/: Evaluation of expressions (True/False).
-
-if_else/: Conditional branching logic.
-
-loops/: Iteration using for and while loops, including loop control (break, continue).
-
-🛠️ Technical Implementation
-Git Workflow
-
-The repository history demonstrates proficiency in version control management, including:
-
-Directory restructuring and modularization.
-
-Conflict resolution and branch synchronization.
-
-Professional commit messaging.
-
-Python Standards
-
-All scripts follow PEP 8 guidelines for readability and utilize modern Python features such as:
-
-F-strings for dynamic output.
-
-Boolean logic for efficient conditional checks.
-
-Iterative logic for data collection processing.
-
-🚀 How to Use
-Clone the repository:
-
-Bash
-git clone https://github.com/suirik/pp2.git
-Navigate to the desired practice folder:
-
-Bash
-cd practice2/loops
-Run any script using Python 3:
-
-Bash
-python3 for_loop.py
+1. **Stage all changes:**
+   * `git add .`
+2. **Commit with a clear message:**
+   * `git commit -m "Add Practice examples"`
+3. **Push to the remote repository:**
+   * `git push origin main`
