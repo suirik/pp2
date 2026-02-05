@@ -1,4 +1,4 @@
-# PP2 PROJECT
+#  PP2 PROJECT
 
 **Source:** W3Schools Python Tutorial  
 
@@ -11,19 +11,30 @@
 ---
 
 ##  Project Structure
-The folder hierarchy is organized as follows:
 
-### **Practice 1: Python Basics**
+### **1. Practice 1: Python Basics**
 * `hello_world.py` — Basic output examples.
 * `variables.py` — Variable declaration and assignment.
 * `data_types.py` — Demonstration of different Python data types.
 * `strings.py` — String manipulation and methods.
 * `numbers.py` — Working with integers and floats.
 
-### **Practice 2: Control Flow**
-* **boolean/** — Evaluation of expressions (True/False).
-* **if_else/** — Conditional branching logic.
-* **loops/** — Iteration using `for` and `while` loops. 
+---
+
+### **2. Practice 2: Control Flow & Logic**
+In this section, I implemented more complex logic to make programs dynamic.
+
+#### ** Boolean & Comparison**
+* **`boolean/`** — Learning how to evaluate expressions to `True` or `False`.
+* Using logical operators like `and`, `or`, and `not` to combine conditions.
+
+#### ** Conditionals (If...Else)**
+* **`if_else/`** — Implementing decision-making paths.
+* Using `if`, `elif`, and `else` to handle multiple scenarios in the code.
+
+#### ** Loops & Iteration**
+* **`loops/`** — Automating repetitive tasks with `for` and `while` loops.
+* **Loop Control**: Using `break` to exit a loop and `continue` to skip an iteration.
 
 ---
 
