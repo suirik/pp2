@@ -1,6 +1,5 @@
 # PP2 PROJECT
 
-**Student:** suiriksamatkyzy  
 **Source:** W3Schools Python Tutorial  
 
 ---
