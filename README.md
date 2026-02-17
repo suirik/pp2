@@ -38,7 +38,7 @@ In this section, I implemented more complex logic to make programs dynamic.
 
 ---
 
-### **3. Practice 3: Functions and OOP
+### **3. Practice 3: Functions and OOP**
 This module covers the implementation of modular code using functions and the principles of Object-Oriented Programming (OOP) in Python.
 
 #### ** Functions**
