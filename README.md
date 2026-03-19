@@ -108,6 +108,24 @@ This module focuses on mastering pattern matching and data extraction using Pyth
 
 ---
 
+### **6. Practice 6: File & Directory Management**
+This module demonstrates system-level interactions and functional programming logic.
+
+#### **File Handling**
+* **write_files.py**: Creating and writing sample data using `open()`.
+* **read_files.py**: Reading, printing, and appending data to existing text files.
+* **copy_delete_files.py**: Managing file backups with `shutil` and safe deletion with `os.remove()`.
+
+#### **Directory Management**
+* **create_list_dirs.py**: Generating nested directory structures and filtering files by extension.
+* **move_files.py**: Automating the movement of files between different folders using `shutil.move()`.
+
+#### **Built-in Functions**
+* **map_filter_reduce.py**: Using `map()` for transformations, `filter()` for extraction, and `reduce()` for aggregation.
+* **enumerate_zip_examples.py**: Implementing paired iteration and demonstrating dynamic type checking with `isinstance()`.
+
+---
+
 ##  How to Save Changes to GitHub
 To sync this project with your GitHub account, use these commands in your terminal:
 
