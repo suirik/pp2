@@ -126,8 +126,22 @@ This module demonstrates system-level interactions and functional programming lo
 
 ---
 
-##  How to Save Changes to GitHub
-To sync this project with your GitHub account, use these commands in your terminal:
+### **7. Practice 7: Python & PostgreSQL PhoneBook**
+
+#### **Project Structure**
+* **phonebook.py**: The main application logic and user menu.
+* **connect.py**: Handles the connection and error handling for the PostgreSQL server.
+* **config.py**: Stores database credentials (host, user, password).
+* **contacts.csv**: Data file used for bulk uploading contacts.
+
+#### Key Features
+1. **Insert from CSV**: Automatically populates the database from a `.csv` file.
+2. **Interactive Search**: Find contacts using name patterns or phone prefixes.
+3. **Safe Deletion**: Remove contacts by username or phone number.
+4. **Data Persistence**: Uses `commit()` to ensure all changes are saved permanently.
+
+---
+
 
 1. **Stage all changes:**
    * `git add .`
