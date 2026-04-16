@@ -142,6 +142,24 @@ This module demonstrates system-level interactions and functional programming lo
 
 ---
 
+### **8. Practice 8: PostgreSQL Functions & Stored Procedures**
+
+#### **SQL Layer: PL/pgSQL**
+In this section, logic was implemented using PostgreSQL's procedural language to handle complex operations.
+#### **Functions (functions.sql)**:
+Pattern Matching: Returning a table of records matching a substring in names or phone numbers.
+Pagination: Implementing data retrieval in chunks using LIMIT and OFFSET to optimize performance.
+#### **Stored Procedures (procedures.sql)**:
+Upsert Logic: A procedure that automatically updates an existing contact or inserts a new one if it doesn't exist.
+Bulk Insert & Validation: Using LOOP and IF logic to process multiple entries while validating data correctness.
+Safe Deletion: A procedure to remove records based on either a username or a phone number.
+#### **Python Layer: Application Logic**
+**phonebook.py**: Refactored the main application to interface with the new SQL functions and procedures.
+**connect.py**: Refined the database connection module for better error handling during function calls.
+**config.py**: Managed database credentials securely (excluded via .gitignore).
+
+---
+
 
 1. **Stage all changes:**
    * `git add .`
