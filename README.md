@@ -160,6 +160,31 @@ Safe Deletion: A procedure to remove records based on either a username or a pho
 
 ---
 
+### **9. Practice 09: Game Development with Pygame**
+
+#### **1. Mickey's Clock**
+A digital-style analog clock featuring Mickey Mouse's hands.
+- **Functionality:** Synchronizes with the local system time.
+- **Controls:** Automatically updates every second.
+- **Key Concepts:** Image rotation (`pygame.transform.rotate`) and time-to-angle conversion.
+
+#### **2. Music Player**
+A fully functional music player with a custom keyboard controller.
+- **Controls:**
+  - `P`: Play
+  - `S`: Stop
+  - `N`: Next track
+  - `B`: Previous track (Back)
+- **Key Concepts:** `pygame.mixer` for audio management and playlist indexing.
+
+#### **3. Moving Ball Game**
+A simple interactive game where you control a red ball.
+- **Controls:** Arrow keys (Up, Down, Left, Right).
+- **Functionality:** The ball moves in 20-pixel increments and is blocked from leaving the screen boundaries.
+- **Key Concepts:** Coordinate systems and boundary collision detection.
+
+---
+
 
 1. **Stage all changes:**
    * `git add .`
