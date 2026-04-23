@@ -1,21 +1,7 @@
-"""
-Practice 11 – Game 3: Paint
-Extensions from Practice 8:
-  1. Draw square
-  2. Draw right triangle
-  3. Draw equilateral triangle
-  4. Draw rhombus
-  5. Commented code throughout
-"""
-
 import pygame
 import sys
 import math
 
-# ──────────────────────────────────────────────
-# CONSTANTS
-# ──────────────────────────────────────────────
-SCREEN_W  = 900
 SCREEN_H  = 650
 TOOLBAR_W = 160   # width of left-side toolbar
 CANVAS_X  = TOOLBAR_W
@@ -86,10 +72,6 @@ TOOL_ORDER = [
     TOOL_FILL, TOOL_ERASER,
 ]
 
-# ──────────────────────────────────────────────
-# GEOMETRY HELPERS
-# ──────────────────────────────────────────────
-
 def points_for_right_triangle(x1, y1, x2, y2):
     """
     Build a right-angle triangle from two corner points.
@@ -154,11 +136,6 @@ def flood_fill(surface, pos, fill_colour):
         surface.set_at((x, y), fill_colour)
         visited.add((x, y))
         stack += [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
-
-
-# ──────────────────────────────────────────────
-# TOOLBAR UI COMPONENT
-# ──────────────────────────────────────────────
 
 class Toolbar:
     """Renders the left-side toolbar with tool buttons, palette, and size picker."""
@@ -275,10 +252,6 @@ class Toolbar:
         return new_tool, new_colour, new_size, clear
 
 
-# ──────────────────────────────────────────────
-# MAIN PAINT APPLICATION
-# ──────────────────────────────────────────────
-
 class PaintApp:
     """The main Paint application class."""
 
@@ -327,8 +300,6 @@ class PaintApp:
             self._draw()
         pygame.quit()
         sys.exit()
-
-    # ── Events ─────────────────────────────────
 
     def _handle_events(self):
         for event in pygame.event.get():
@@ -524,9 +495,6 @@ class PaintApp:
         pygame.display.flip()
 
 
-# ──────────────────────────────────────────────
-# ENTRY POINT
-# ──────────────────────────────────────────────
 if __name__ == "__main__":
     app = PaintApp()
     app.run()
