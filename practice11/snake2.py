@@ -1,18 +1,7 @@
-"""
-Practice 11 – Game 2: Snake
-Extensions from Practice 8:
-  1. Randomly generating food with different weights (values)
-  2. Foods which disappear after a timer
-  3. Commented code throughout
-"""
-
 import pygame
 import random
 import sys
 
-# ──────────────────────────────────────────────
-# CONSTANTS
-# ──────────────────────────────────────────────
 CELL        = 20           # Size of each grid cell in pixels
 COLS        = 30           # Number of columns in the grid
 ROWS        = 28           # Number of rows (play area)
@@ -41,11 +30,11 @@ ORANGE      = (255, 140, 0)
 PURPLE      = (180, 60,  200)
 SILVER      = (192, 192, 192)
 
-# ──────────────────────────────────────────────
+
 # FOOD TYPES
 # Each entry: label, score value, colour, spawn weight, lifetime (frames)
 # Lower lifetime → food disappears faster
-# ──────────────────────────────────────────────
+
 FOOD_TYPES = [
     {"label": "Apple",   "value": 1, "colour": RED,    "weight": 50, "lifetime": None },  # never disappears
     {"label": "Orange",  "value": 2, "colour": ORANGE, "weight": 30, "lifetime": 50   },  # ~5 s at FPS 10
@@ -55,9 +44,8 @@ FOOD_TYPES = [
 
 MAX_FOOD_ON_SCREEN = 4    # Maximum simultaneous food items
 
-# ──────────────────────────────────────────────
-# HELPER – weighted random choice
-# ──────────────────────────────────────────────
+
+
 def weighted_choice(items):
     """Select an item from `items` list proportionally by its 'weight' key."""
     total   = sum(i["weight"] for i in items)
@@ -69,9 +57,6 @@ def weighted_choice(items):
             return item
     return items[-1]
 
-# ──────────────────────────────────────────────
-# CLASSES
-# ──────────────────────────────────────────────
 
 class Food:
     """A single food item with a score value and optional disappear timer."""
@@ -204,9 +189,8 @@ class Snake:
             pygame.draw.circle(surface, BLACK,     (ex + dx, ey + dy), 1)
 
 
-# ──────────────────────────────────────────────
-# GAME STATE
-# ──────────────────────────────────────────────
+
+
 
 class SnakeGame:
     """Main game controller for Snake."""
@@ -369,10 +353,6 @@ class SnakeGame:
         self.screen.blit(sc,  sc.get_rect(center=(cx, cy + 10)))
         self.screen.blit(rst, rst.get_rect(center=(cx, cy + 50)))
 
-
-# ──────────────────────────────────────────────
-# ENTRY POINT
-# ──────────────────────────────────────────────
 if __name__ == "__main__":
     game = SnakeGame()
     game.run()
