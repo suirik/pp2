@@ -212,6 +212,31 @@ A simple drawing application.
 
 ---
 
+### **11. Practice 11: Advanced Pygame Mechanics**
+
+##  Game Extensions
+
+#### **1. Racer (Enhanced)**
+- **Weighted Coins:** Coins now spawn with different "weights" (values). Collecting a heavy coin provides more points than a standard one.
+- **Dynamic Difficulty:** The game tracks your progress. Once you collect **N** coins, the enemy vehicle's speed increases, making the game progressively harder.
+- **Key Features:** Sprite groups, random coordinate generation, and speed increment logic.
+
+#### **2. Snake (Enhanced)**
+- **Multi-Weight Food:** Food items now have varying nutritional values. Some make the snake grow more than others.
+- **Disappearing Food:** Some food items are now on a **Timer**. If you don't reach the food before the timer expires, it disappears and respawns elsewhere.
+- **Key Features:** `pygame.time.get_ticks()` for timers and coordinate re-randomization.
+
+#### **3. Paint (Enhanced)**
+- **Advanced Geometry:** Beyond basic lines and circles, the toolkit now includes:
+  - **Square:** Precise equal-side rectangles.
+  - **Right Triangle:** 90-degree angular shapes.
+  - **Equilateral Triangle:** Calculated points for equal side lengths.
+  - **Rhombus:** Diamond-shaped polygons.
+- **Key Features:** `pygame.draw.polygon()` and coordinate math.
+
+---
+
+
 1. **Stage all changes:**
    * `git add .`
 2. **Commit with a clear message:**
