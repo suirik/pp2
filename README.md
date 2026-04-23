@@ -160,7 +160,7 @@ Safe Deletion: A procedure to remove records based on either a username or a pho
 
 ---
 
-### **9. Practice 09: Game Development with Pygame**
+### **9. Practice 9: Game Development with Pygame**
 
 #### **1. Mickey's Clock**
 A digital-style analog clock featuring Mickey Mouse's hands.
@@ -185,6 +185,32 @@ A simple interactive game where you control a red ball.
 
 ---
 
+### **10. Practice 10: Advanced Game Development with Pygame**
+
+##  Games Included
+
+#### **1. Racer**
+A high-speed driving game where you must dodge enemies and collect coins.
+- **Objective:** Dodge the "Enemy" car and collect "Coins" to increase your score.
+- **Controls:** Left/Right Arrow keys.
+- **Key Features:** Random enemy spawning, scrolling background, and sound effects.
+
+#### **2. Snake** 
+The classic arcade game.
+- **Objective:** Eat food to grow longer without hitting the walls or your own tail.
+- **Controls:** Arrow keys (Up, Down, Left, Right).
+- **Key Features:** Dynamic score display, speed increases as you grow, and boundary logic.
+
+#### **3. Paint** 
+A simple drawing application.
+- **Objective:** Draw shapes and free-hand lines on a canvas.
+- **Features:**
+  - Change colors and brush sizes.
+  - Draw circles, rectangles, and lines.
+  - Clear the screen option.
+- **Controls:** Mouse clicks and specific keyboard shortcuts for tools.
+
+---
 
 1. **Stage all changes:**
    * `git add .`
