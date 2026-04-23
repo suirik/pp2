@@ -1,18 +1,7 @@
-"""
-Practice 11 – Game 1: Racer
-Extensions from Practice 8:
-  1. Randomly generating coins with different weights on the road
-  2. Increase the speed of Enemy when the player earns N coins
-  3. Commented code throughout
-"""
-
 import pygame
 import random
 import sys
 
-# ──────────────────────────────────────────────
-# CONSTANTS
-# ──────────────────────────────────────────────
 SCREEN_W, SCREEN_H = 480, 700   # Window size in pixels
 FPS               = 60          # Frames per second cap
 
@@ -44,9 +33,7 @@ COIN_TYPES = [
     {"label": "GOLD",   "value": 3, "colour": YELLOW,         "weight": 10},
 ]
 
-# ──────────────────────────────────────────────
-# HELPER – weighted random choice
-# ──────────────────────────────────────────────
+
 def weighted_choice(items):
     """Return one item from `items` using its 'weight' key as probability."""
     total   = sum(i["weight"] for i in items)
@@ -57,10 +44,6 @@ def weighted_choice(items):
         if roll <= running:
             return item
     return items[-1]  # fallback
-
-# ──────────────────────────────────────────────
-# CLASSES
-# ──────────────────────────────────────────────
 
 class PlayerCar:
     """The car controlled by the player."""
@@ -198,10 +181,6 @@ class Road:
             pygame.draw.rect(surface, WHITE, (cx - self.STRIPE_W // 2, y, self.STRIPE_W, self.STRIPE_H))
             y += self.STRIPE_H + self.GAP
 
-
-# ──────────────────────────────────────────────
-# GAME STATE
-# ──────────────────────────────────────────────
 
 class RacerGame:
     """Main game controller."""
@@ -380,9 +359,6 @@ class RacerGame:
         self.screen.blit(rest_txt, rest_txt.get_rect(center=(SCREEN_W // 2, SCREEN_H // 2 + 50)))
 
 
-# ──────────────────────────────────────────────
-# ENTRY POINT
-# ──────────────────────────────────────────────
 if __name__ == "__main__":
     game = RacerGame()
     game.run()
