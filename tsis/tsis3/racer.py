@@ -59,4 +59,4 @@ class Collectible(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.y += self.speed
-        if self.rect.top > HEIGHT: self.kill()
+        if self.rect.top > HEIGHT: self.kill() 

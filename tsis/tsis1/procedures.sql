@@ -5,7 +5,7 @@ CREATE OR REPLACE PROCEDURE add_phone(
     p_type         VARCHAR
 )
 LANGUAGE plpgsql
-AS $$
+AS $$ 
 DECLARE
     v_contact_id INT;
 BEGIN

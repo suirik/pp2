@@ -10,7 +10,7 @@ import psycopg2.extras
 from connect import get_connection
 
 # --- helper functions ---
-
+ 
 def _conn():
     return get_connection()
 

@@ -84,7 +84,7 @@ class SnakeEngine:
                     if event.key == pygame.K_RIGHT and self.vector != (-TILE, 0): self.vector = (TILE, 0)
 
             self.update()
-            self.render()
+            self.render() 
             
             # HUD in-game
             font = pygame.font.SysFont("Arial", 18)

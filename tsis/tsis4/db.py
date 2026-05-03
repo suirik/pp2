@@ -4,7 +4,7 @@ from config import DATABASE_ACCESS
 def connect_db():
     return psycopg2.connect(**DATABASE_ACCESS)
 
-def setup_tables():
+def setup_tables(): 
     with connect_db() as conn:
         with conn.cursor() as cur:
             cur.execute("""

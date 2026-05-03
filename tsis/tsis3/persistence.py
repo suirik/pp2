@@ -20,4 +20,4 @@ def update_leaderboard(name, score, distance):
     data = load_json('leaderboard.json', [])
     data.append({"name": name, "score": int(score), "distance": int(distance)})
     data = sorted(data, key=lambda x: x['score'], reverse=True)[:10]
-    save_json('leaderboard.json', data)
+    save_json('leaderboard.json', data) 

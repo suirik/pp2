@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS groups (
 INSERT INTO groups (name) VALUES
     ('Family'), ('Work'), ('Friend'), ('Other')
 ON CONFLICT (name) DO NOTHING;
-
+ 
 -- main table for people
 CREATE TABLE IF NOT EXISTS contacts (
     id         SERIAL PRIMARY KEY,
