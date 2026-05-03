@@ -1,0 +1,9 @@
+import csv
+
+def upload_from_csv(filename):
+    with open(filename, 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            # row[0] is name, row[1] is phone
+            insert_contact(row[0], row[1])
+    print("CSV data uploaded successfully.") 
