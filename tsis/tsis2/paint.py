@@ -37,7 +37,7 @@ from tools import (
 class PaintApp:
     """The main Paint application: event loop, drawing logic, and rendering."""
 
-    def __init__(self): 
+    def __init__(self):
         pygame.init()
         self.screen     = pygame.display.set_mode((SCREEN_W, SCREEN_H))
         pygame.display.set_caption("Paint – TSIS 2")

@@ -1,3 +1,8 @@
+"""
+my main phonebook file for TSIS 1.
+adding the new features on top of what we did in practice 7 and 8.
+"""
+
 import csv
 import json
 import os
@@ -10,7 +15,7 @@ import psycopg2.extras
 from connect import get_connection
 
 # --- helper functions ---
- 
+
 def _conn():
     return get_connection()
 

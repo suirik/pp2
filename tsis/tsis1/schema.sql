@@ -1,3 +1,8 @@
+-- ============================================================
+-- setting up the tables for the extended phonebook (TSIS 1)
+-- run this once to create everything or upgrade the old tables
+
+-- table for groups like family, work, etc.
 CREATE TABLE IF NOT EXISTS groups (
     id   SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL
@@ -7,7 +12,7 @@ CREATE TABLE IF NOT EXISTS groups (
 INSERT INTO groups (name) VALUES
     ('Family'), ('Work'), ('Friend'), ('Other')
 ON CONFLICT (name) DO NOTHING;
- 
+
 -- main table for people
 CREATE TABLE IF NOT EXISTS contacts (
     id         SERIAL PRIMARY KEY,

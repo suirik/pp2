@@ -1,195 +1,156 @@
 import pygame
-import sys
-import os
-import json
-from db import setup_tables, record_match, fetch_leaderboard, fetch_best_score
-from game import SnakeEngine, VIEW_WIDTH, VIEW_HEIGHT
+import db
+import config
+import game
 
-# Настройка пути к музыке
-MUSIC_FILE = "assets/music.mp3" 
+pygame.init()
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Advanced Snake - PostgreSQL & JSON")
+font = pygame.font.SysFont(None, 48)
+small_font = pygame.font.SysFont(None, 36)
 
-class Interface:
-    def __init__(self):
-        pygame.init()
-        pygame.mixer.init()  # Инициализация звукового движка
+def draw_button(text, rect, color, hover_color, mouse_pos):
+    # helper to draw a button and change its color if the mouse is over it
+    is_hover = rect.collidepoint(mouse_pos)
+    pygame.draw.rect(screen, hover_color if is_hover else color, rect)
+    text_surf = font.render(text, True, (255, 255, 255))
+    screen.blit(text_surf, (rect.x + (rect.width - text_surf.get_width())//2, rect.y + 10))
+    return is_hover
+
+def main():
+    # setup everything before starting the loop
+    db.setup_database()
+    settings = config.load_settings()
+    
+    state = "MENU"
+    username = ""
+    player_id = None
+    last_score, last_level = 0, 0
+    personal_best = 0
+
+    running = True
+    while running:
+        mouse_pos = pygame.mouse.get_pos()
+        click = False
         
-        self.canvas = pygame.display.set_mode((VIEW_WIDTH, VIEW_HEIGHT))
-        pygame.display.set_caption("Cyber Snake v2.0")
-        
-        # Шрифты (используем стандартные, чтобы не было ошибок)
-        self.title_font = pygame.font.SysFont("Impact", 42)
-        self.ui_font = pygame.font.SysFont("Verdana", 24)
-        self.small_font = pygame.font.SysFont("Verdana", 16)
-        
-        self.user_name = ""
-        self.pref_path = "user_prefs.json"
-        self.prefs = self.load_prefs()
-        
-        setup_tables()
-        self.apply_music()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                click = True
+            
+            # let the user type their name, and handle backspace
+            if state == "MENU" and event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    username = username[:-1]
+                elif event.key != pygame.K_RETURN and len(username) < 15:
+                    username += event.unicode
 
-    def load_prefs(self):
-        """Загрузка настроек из JSON"""
-        default = {"snake_color": (0, 255, 100), "grid": True, "music": True}
-        if os.path.exists(self.pref_path):
-            try:
-                with open(self.pref_path, "r") as f:
-                    data = json.load(f)
-                    data["snake_color"] = tuple(data["snake_color"])
-                    if "music" not in data: data["music"] = True
-                    return data
-            except:
-                pass
-        return default
+        screen.fill((20, 20, 20))
 
-    def save_prefs(self):
-        """Сохранение настроек в JSON"""
-        with open(self.pref_path, "w") as f:
-            json.dump(self.prefs, f)
+        if state == "MENU":
+            # show the main menu
+            title = font.render("SNAKE GAME", True, (0, 255, 0))
+            screen.blit(title, (WIDTH//2 - title.get_width()//2, 50))
+            
+            # blinking cursor for the username input
+            prompt = small_font.render("Type Username: " + username + ("_" if pygame.time.get_ticks() % 1000 < 500 else ""), True, (200, 200, 200))
+            screen.blit(prompt, (WIDTH//2 - prompt.get_width()//2, 150))
 
-    def apply_music(self):
-        """Логика включения/выключения музыки"""
-        if self.prefs.get("music") and os.path.exists(MUSIC_FILE):
-            if not pygame.mixer.music.get_busy():
-                try:
-                    pygame.mixer.music.load(MUSIC_FILE)
-                    pygame.mixer.music.set_volume(0.3)
-                    pygame.mixer.music.play(-1)
-                except Exception as e:
-                    print(f"Ошибка загрузки музыки: {e}")
-        else:
-            pygame.mixer.music.stop()
+            btn_play = pygame.Rect(WIDTH//2 - 100, 250, 200, 50)
+            btn_lead = pygame.Rect(WIDTH//2 - 125, 320, 250, 50)
+            btn_sett = pygame.Rect(WIDTH//2 - 100, 390, 200, 50)
+            btn_quit = pygame.Rect(WIDTH//2 - 100, 460, 200, 50)
 
-    def draw_text(self, msg, y, color=(255, 255, 255), font=None):
-        """Вспомогательный метод для центровки текста"""
-        f = font if font else self.ui_font
-        img = f.render(msg, True, color)
-        self.canvas.blit(img, img.get_rect(center=(VIEW_WIDTH // 2, y)))
+            if draw_button("Play", btn_play, (50, 150, 50), (80, 200, 80), mouse_pos) and click and username != "":
+                player_id = db.get_or_create_player(username)
+                personal_best = db.get_personal_best(player_id)
+                state = "PLAYING"
+            if draw_button("Leaderboard", btn_lead, (50, 50, 150), (80, 80, 200), mouse_pos) and click:
+                state = "LEADERBOARD"
+            if draw_button("Settings", btn_sett, (150, 150, 50), (200, 200, 80), mouse_pos) and click:
+                state = "SETTINGS"
+            if draw_button("Quit", btn_quit, (150, 50, 50), (200, 80, 80), mouse_pos) and click:
+                running = False
 
-    def menu(self):
-        """Главный цикл меню"""
-        while True:
-            self.canvas.fill((15, 15, 25)) # Глубокий темный фон
-            self.draw_text("SNAKE ARENA", 80, (0, 255, 150), self.title_font)
-            
-            # Поле ввода имени
-            input_rect = pygame.Rect(VIEW_WIDTH // 2 - 110, 140, 220, 45)
-            pygame.draw.rect(self.canvas, (40, 40, 65), input_rect, border_radius=8)
-            pygame.draw.rect(self.canvas, (0, 255, 150), input_rect, 1, border_radius=8)
-            
-            name_disp = self.user_name if self.user_name else "Enter Nickname..."
-            self.draw_text(name_disp, 162, (200, 200, 200), self.small_font)
-            
-            self.draw_text("PRESS [ENTER] TO START", 240)
-            self.draw_text("[S] SETTINGS  |  [L] LEADERS", 300, (150, 150, 150), self.small_font)
-            self.draw_text("EXIT WITH [ESC]", 350, (100, 100, 100), self.small_font)
-            
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    return
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        return
-                    if event.key == pygame.K_RETURN and self.user_name.strip():
-                        # Запуск игры
-                        pb = fetch_best_score(self.user_name)
-                        game = SnakeEngine(self.canvas, self.prefs, self.user_name, pb)
-                        res = game.start_loop()
-                        
-                        if res["exit"]: return
-                        
-                        # Сохранение результата
-                        record_match(self.user_name, res["score"], res["lvl"])
-                        self.apply_music() # Перезапуск музыки после игры
-                        
-                    elif event.key == pygame.K_BACKSPACE:
-                        self.user_name = self.user_name[:-1]
-                    elif event.key == pygame.K_l:
-                        self.show_leaders()
-                    elif event.key == pygame.K_s:
-                        self.settings_menu()
-                    else:
-                        # Ввод только букв и цифр
-                        if len(self.user_name) < 14 and event.unicode.isalnum():
-                            self.user_name += event.unicode
-            
-            pygame.display.flip()
-
-    def settings_menu(self):
-        """Экран настроек"""
-        active = True
-        while active:
-            self.canvas.fill((25, 25, 35))
-            self.draw_text("CONFIGURATION", 60, (255, 255, 255), self.title_font)
-            
-            grid_status = "ENABLED" if self.prefs["grid"] else "DISABLED"
-            music_status = "ON" if self.prefs["music"] else "OFF"
-            
-            self.draw_text(f"[G] GRID: {grid_status}", 140, font=self.small_font)
-            self.draw_text(f"[M] MUSIC: {music_status}", 180, font=self.small_font)
-            self.draw_text(f"[C] CHANGE COLOR", 230, font=self.small_font)
-            
-            # Предпросмотр цвета змейки
-            preview_rect = pygame.Rect(VIEW_WIDTH // 2 - 40, 255, 80, 15)
-            pygame.draw.rect(self.canvas, self.prefs["snake_color"], preview_rect, border_radius=5)
-            
-            self.draw_text("PRESS [ESC] TO SAVE & EXIT", 340, (150, 150, 150), self.small_font)
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_g:
-                        self.prefs["grid"] = not self.prefs["grid"]
-                    if event.key == pygame.K_m:
-                        self.prefs["music"] = not self.prefs["music"]
-                        self.apply_music()
-                    if event.key == pygame.K_c:
-                        # Список доступных цветов
-                        colors = [(0, 255, 120), (255, 180, 0), (220, 50, 255), (50, 150, 255), (255, 50, 50)]
-                        try:
-                            current_tuple = tuple(self.prefs["snake_color"])
-                            idx = (colors.index(current_tuple) + 1) % len(colors)
-                        except:
-                            idx = 0
-                        self.prefs["snake_color"] = colors[idx]
-                    if event.key == pygame.K_ESCAPE:
-                        self.save_prefs()
-                        active = False
-            pygame.display.flip()
-
-    def show_leaders(self):
-        """Экран таблицы лидеров"""
-        active = True
-        while active:
-            self.canvas.fill((10, 10, 15))
-            self.draw_text("HALL OF FAME", 50, (255, 215, 0))
-            
-            data = fetch_leaderboard()
-            if not data:
-                self.draw_text("No records yet...", 180, (100, 100, 100), self.small_font)
+        elif state == "PLAYING":
+            # run the actual game and wait for it to finish
+            last_score, last_level = game.run_game(screen, settings, personal_best)
+            if last_score is None: # user closed the window while playing
+                running = False
             else:
-                for i, r in enumerate(data):
-                    # r[0]: name, r[1]: score, r[2]: level
-                    txt = f"{i+1}. {r[0]} | {r[1]} pts | Lv.{r[2]}"
-                    self.draw_text(txt, 110 + i * 25, font=self.small_font)
+                # game over, save the score to the db
+                db.save_score(player_id, last_score, last_level)
+                state = "GAME_OVER"
+
+        elif state == "GAME_OVER":
+            # game over screen
+            go_text = font.render("GAME OVER", True, (255, 0, 0))
+            screen.blit(go_text, (WIDTH//2 - go_text.get_width()//2, 100))
             
-            self.draw_text("PRESS ANY KEY TO BACK", 370, (80, 80, 80), self.small_font)
+            s_text = small_font.render(f"Score: {last_score} | Level: {last_level}", True, (255, 255, 255))
+            screen.blit(s_text, (WIDTH//2 - s_text.get_width()//2, 200))
+
+            btn_retry = pygame.Rect(WIDTH//2 - 100, 300, 200, 50)
+            btn_menu = pygame.Rect(WIDTH//2 - 100, 370, 200, 50)
+
+            if draw_button("Retry", btn_retry, (50, 150, 50), (80, 200, 80), mouse_pos) and click:
+                personal_best = db.get_personal_best(player_id)
+                state = "PLAYING"
+            if draw_button("Menu", btn_menu, (100, 100, 100), (150, 150, 150), mouse_pos) and click:
+                state = "MENU"
+
+        elif state == "LEADERBOARD":
+            # fetch the top scores and display them
+            title = font.render("TOP 10 SCORES", True, (255, 215, 0))
+            screen.blit(title, (WIDTH//2 - title.get_width()//2, 30))
             
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    active = False
-            pygame.display.flip()
+            y_offset = 100
+            for rank, row in enumerate(db.get_top_10(), 1):
+                txt = small_font.render(f"{rank}. {row[0]} - Score: {row[1]} - Lvl: {row[2]}", True, (200, 200, 200))
+                screen.blit(txt, (WIDTH//2 - txt.get_width()//2, y_offset))
+                y_offset += 35
+                
+            btn_back = pygame.Rect(WIDTH//2 - 100, 500, 200, 50)
+            if draw_button("Back", btn_back, (100, 100, 100), (150, 150, 150), mouse_pos) and click:
+                state = "MENU"
+
+        elif state == "SETTINGS":
+            # simple settings menu to toggle things
+            title = font.render("SETTINGS", True, (255, 255, 255))
+            screen.blit(title, (WIDTH//2 - title.get_width()//2, 50))
+
+            grid_lbl = "Grid: ON" if settings["grid_overlay"] else "Grid: OFF"
+            sound_lbl = "Sound: ON" if settings["sound"] else "Sound: OFF"
+            
+            btn_grid = pygame.Rect(WIDTH//2 - 150, 150, 300, 50)
+            btn_sound = pygame.Rect(WIDTH//2 - 150, 220, 300, 50)
+            btn_color = pygame.Rect(WIDTH//2 - 150, 290, 300, 50)
+            btn_back = pygame.Rect(WIDTH//2 - 100, 450, 200, 50)
+
+            if draw_button(grid_lbl, btn_grid, (70, 70, 70), (100, 100, 100), mouse_pos) and click:
+                settings["grid_overlay"] = not settings["grid_overlay"]
+                config.save_settings(settings)
+            
+            if draw_button(sound_lbl, btn_sound, (70, 70, 70), (100, 100, 100), mouse_pos) and click:
+                settings["sound"] = not settings["sound"]
+                config.save_settings(settings)
+                
+            # change the snake color (Green -> Blue -> Yellow)
+            if draw_button("Cycle Snake Color", btn_color, tuple(settings["snake_color"]), (150, 150, 150), mouse_pos) and click:
+                c = settings["snake_color"]
+                if c == [0, 255, 0]: settings["snake_color"] = [0, 100, 255] # Blue
+                elif c == [0, 100, 255]: settings["snake_color"] = [255, 255, 0] # Yellow
+                else: settings["snake_color"] = [0, 255, 0] # Green
+                config.save_settings(settings)
+
+            if draw_button("Back", btn_back, (100, 100, 100), (150, 150, 150), mouse_pos) and click:
+                state = "MENU"
+
+        pygame.display.flip()
+
+    pygame.quit()
 
 if __name__ == "__main__":
-    try:
-        app = Interface()
-        app.menu()
-    except Exception as e:
-        print(f"Критическая ошибка: {e}")
-    finally:
-        pygame.quit() 
+    main()

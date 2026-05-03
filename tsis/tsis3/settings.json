@@ -1,5 +1,5 @@
 {
-    "sound": true,
-    "color": "Player.png",
-    "diff": 1
-} 
+  "sound": true,
+  "car_color": "red",
+  "difficulty": "normal"
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "id": 11,
+    "first_name": "Aruzhan",
+    "last_name": "Suleiman",
+    "email": "aru.sul@nu.edu.kz",
+    "birthday": "2003-01-25",
+    "group_name": "Friend",
+    "phones": [
+      {
+        "phone": "+7-777-000-1122",
+        "type": "mobile"
+      },
+      {
+        "phone": "87070101010",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "first_name": "Berik",
+    "last_name": "Aidarov",
+    "email": "b.aidarov@kpmg.kz",
+    "birthday": "1982-10-01",
+    "group_name": "Work",
+    "phones": [
+      {
+        "phone": "+7-701-666-5544",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "first_name": "Damir",
+    "last_name": "Ilyasov",
+    "email": "damir.i@kbtu.kz",
+    "birthday": "2002-11-05",
+    "group_name": "Friend",
+    "phones": [
+      {
+        "phone": "+7-707-111-2233",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "first_name": "Dana",
+    "last_name": "Zhumatova",
+    "email": "dana.z@edu.kz",
+    "birthday": "2000-02-14",
+    "group_name": "Other",
+    "phones": [
+      {
+        "phone": "+7-702-999-0011",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "first_name": "Igor",
+    "last_name": "Kuznetsov",
+    "email": "igor.k@mail.ru",
+    "birthday": "1991-07-08",
+    "group_name": "Other",
+    "phones": [
+      {
+        "phone": "+7-702-333-4455",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "first_name": "Kamila",
+    "last_name": "Bolatova",
+    "email": "k.bolat@outlook.com",
+    "birthday": "1999-12-30",
+    "group_name": "Family",
+    "phones": [
+      {
+        "phone": "+7-701-888-9900",
+        "type": "home"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "first_name": "Marat",
+    "last_name": "Saparov",
+    "email": "m.saparov@company.kz",
+    "birthday": "1984-03-15",
+    "group_name": "Work",
+    "phones": [
+      {
+        "phone": "+7-707-222-3344",
+        "type": "work"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "first_name": "Oleg",
+    "last_name": "Tyan",
+    "email": "oleg.tyan@gmail.com",
+    "birthday": "1995-06-22",
+    "group_name": "Friend",
+    "phones": [
+      {
+        "phone": "+7-705-555-6677",
+        "type": "mobile"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "first_name": "Rustam",
+    "last_name": "Kasimov",
+    "email": "r.kasim@yandex.ru",
+    "birthday": "1988-09-12",
+    "group_name": "Family",
+    "phones": [
+      {
+        "phone": "+7-705-777-8899",
+        "type": "home"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "first_name": "Saniya",
+    "last_name": "Omarova",
+    "email": "saniya.o@gmail.com",
+    "birthday": "1996-04-18",
+    "group_name": "Work",
+    "phones": [
+      {
+        "phone": "+7-701-444-5566",
+        "type": "work"
+      }
+    ]
+  }
+]

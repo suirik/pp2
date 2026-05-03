@@ -261,7 +261,7 @@ class Toolbar:
 
         for rect, col in self.palette_rects:
             if rect.collidepoint(pos):
-                new_colour = col 
+                new_colour = col
 
         for rect, sz in self.size_rects:
             if rect.collidepoint(pos):
